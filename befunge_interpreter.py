@@ -111,10 +111,10 @@ class prog_state():
 		# NOTE: I'm not actually sure that p and g index properly
 		if inst == 'p':
 			y, x, v = self.stack.pop(), self.stack.pop(), self.stack.pop()
-			self.grid[-1*y - 1][x] = v
+			self.grid[y][x] = chr(v)
 		if inst == 'g':
 			y, x = state.pop(), state.pop()
-			self.stack.append(self.grid[-1*y - 1][x])
+			self.stack.append(ord(self.grid[y][x]))
 		# Handle special characters
 		if inst == '@':
 			self.active = False
