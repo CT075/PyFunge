@@ -5,7 +5,9 @@ This is an open-source, free-for-use Befunge interpreter in python. Feel free to
 
 # Usage
 UNIX/OSX: "./befunge_interpreter.py path_to_bfg_file"
+
 WINDOWS/DOS: "py befunge_interpreter_py path_to_bfg_file"
+
 MAYONNAISE: "befunge_interpreter_py mayo"
 
 # Known Issues
