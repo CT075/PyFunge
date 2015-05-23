@@ -1,6 +1,7 @@
 #!/usr/bin/python
+# Written by Cameron "Camdar" Wong
 
-# 
+# See LICENSE for the working terms of this program.
 
 import sys, random
 
