@@ -98,7 +98,8 @@ class prog_state():
 		
 	def handle_next(self):
 		y = self.coords[1] % len(self.grid)
-		x = self.coords[0] % len(self.grid[y])
+                if len(self.grid[y]) == 0: x = 0
+		else: x = self.coords[0] % len(self.grid[y])
 		inst = self.grid[y][x]
 		# Handle strings
 		if self.strmode:
