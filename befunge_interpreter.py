@@ -1,4 +1,4 @@
-#!/usr/bin/python
+/usr/bin/python
 # Written by Cameron "Camdar" Wong
 
 # See LICENSE for the working terms of this program.
@@ -98,7 +98,7 @@ class prog_state():
 		
 	def handle_next(self):
 		y = self.coords[1] % len(self.grid)
-                if len(self.grid[y]) == 0: x = 0
+		if len(self.grid[y]) == 0: x = 0
 		else: x = self.coords[0] % len(self.grid[y])
 		inst = self.grid[y][x]
 		# Handle strings
