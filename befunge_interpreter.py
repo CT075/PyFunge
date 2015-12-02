@@ -41,7 +41,7 @@ def befunge_div(state):
 @inst_wrapper('%')
 def befunge_mod(state):
 	b, a = state.pop(), state.pop()
-	state.append(a%b)
+	state.append(a % b)
 @inst_wrapper('!')
 def befunge_not(state):
 	state.append(int(not bool(state.pop())))
@@ -65,10 +65,10 @@ def befunge_discard(state):
 	state.pop()
 @inst_wrapper('.')
 def befunge_num_out(state):
-	print(state.pop())
+	print(state.pop(), end='')
 @inst_wrapper(',')
 def befunge_str_out(state):
-	print(chr(state.pop()))
+	print(chr(state.pop()), end='')
 @inst_wrapper('&')
 def befunge_num_in(state):
 	a = input()
