@@ -1,4 +1,4 @@
-/usr/bin/python
+#!/usr/bin/python
 # Written by Cameron "Camdar" Wong
 
 # See LICENSE for the working terms of this program.
@@ -95,11 +95,10 @@ class prog_state():
 		self.stack = []
 		self.jump = False
 		self.strmode = False
-		
+
 	def handle_next(self):
 		y = self.coords[1] % len(self.grid)
-		if len(self.grid[y]) == 0: x = 0
-		else: x = self.coords[0] % len(self.grid[y])
+		x = self.coords[0] % len(self.grid[y])
 		inst = self.grid[y][x]
 		# Handle strings
 		if self.strmode:
@@ -137,7 +136,7 @@ class prog_state():
 		if inst in INSTRUCTIONS:
 			INSTRUCTIONS[inst](self.stack)
 			return
-	
+
 	def step(self):
 		self.coords = self.dir(*self.coords)
 		if self.jump:
@@ -149,9 +148,15 @@ def main():
 	if len(sys.argv) != 2:
 		print('usage: befunge_interpreter.py bf_file')
 		return
-	with open(sys.argv[1]) as f: prog = list(map(list, f.readlines()))
+	with open(sys.argv[1]) as f:
+		prog = list(map(list, f.readlines()))
+	grid_width = -1
 	for line in prog:
 		if '\n' in line: line.remove('\n')
+		if len(line) > grid_width: grid_width = len(line)
+	# pad out each line to the width of the grid
+	for line in prog:
+		line += [' '] * (grid_width-len(line))
 	state = prog_state(prog)
 	while state.active:
 		state.handle_next()
