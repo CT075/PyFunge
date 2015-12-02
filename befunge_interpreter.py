@@ -162,7 +162,7 @@ def main():
 		if len(line) > grid_width: grid_width = len(line)
 	# pad out each line to the width of the grid
 	for line in prog:
-		line += [' '] * (grid_width-len(line))
+		line += [chr(0)] * (grid_width-len(line))
 	state = prog_state(prog)
 	while state.active:
 		state.handle_next()
