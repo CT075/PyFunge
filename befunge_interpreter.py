@@ -41,7 +41,7 @@ def befunge_div(state):
 @inst_wrapper('%')
 def befunge_mod(state):
 	b, a = state.pop(), state.pop()
-	state.append(b % a)
+	state.append(a%b)
 @inst_wrapper('!')
 def befunge_not(state):
 	state.append(int(not bool(state.pop())))
@@ -85,7 +85,7 @@ class prog_state():
 	__slots__ = [
 		'grid', 'dir', 'coords',
 		'stack', 'active', 'jump',
-		'width', 'height'
+		'width', 'height',
 		'strmode'
 	]
 	def __init__(self, prog):
@@ -116,8 +116,8 @@ class prog_state():
 			y, x, v = self.stack.pop(), self.stack.pop(), self.stack.pop()
 			self.grid[y][x] = chr(v)
 		if inst == 'g':
-			y, x = state.pop(), state.pop()
-			if x > width or x < 0 or y > height or y < 0:
+			y, x = self.stack.pop(), self.stack.pop()
+			if x > self.width or x < 0 or y > self.height or y < 0:
 				self.stack.append(0)
 			else:
 				self.stack.append(ord(self.grid[y][x]))
@@ -159,10 +159,10 @@ def main():
 	grid_width = -1
 	for line in prog:
 		if '\n' in line: line.remove('\n')
-		if len(line) > grid_width: grid_width = len(line)
+		grid_width = max(len(line), grid_width)
 	# pad out each line to the width of the grid
 	for line in prog:
-		line += [chr(0)] * (grid_width-len(line))
+		line.extend([chr(0)] * (grid_width-len(line)))
 	state = prog_state(prog)
 	while state.active:
 		state.handle_next()
