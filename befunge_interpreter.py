@@ -85,10 +85,13 @@ class prog_state():
 	__slots__ = [
 		'grid', 'dir', 'coords',
 		'stack', 'active', 'jump',
+		'width', 'height'
 		'strmode'
 	]
 	def __init__(self, prog):
 		self.grid = prog
+		self.height = len(prog)
+		self.width = len(prog[0])
 		self.coords = (0, 0)
 		self.dir = DIRS['>']
 		self.active = True
@@ -97,8 +100,8 @@ class prog_state():
 		self.strmode = False
 
 	def handle_next(self):
-		y = self.coords[1] % len(self.grid)
-		x = self.coords[0] % len(self.grid[y])
+		y = self.coords[1] % self.height
+		x = self.coords[0] % self.width
 		inst = self.grid[y][x]
 		# Handle strings
 		if self.strmode:
@@ -114,7 +117,10 @@ class prog_state():
 			self.grid[y][x] = chr(v)
 		if inst == 'g':
 			y, x = state.pop(), state.pop()
-			self.stack.append(ord(self.grid[y][x]))
+			if x > width or x < 0 or y > height or y < 0:
+				self.stack.append(0)
+			else:
+				self.stack.append(ord(self.grid[y][x]))
 		# Handle special characters
 		if inst == '@':
 			self.active = False
