@@ -167,6 +167,6 @@ def main():
 	while state.active:
 		state.handle_next()
 		state.step()
-	print('Program terminated.')
+	print('\nProgram terminated.')
 
 if __name__ == '__main__': main()
