@@ -1,7 +1,7 @@
 # PyFunge
 Author: Cameron "Camdar" Wong (aka CT075)
 
-This is an open-source, free-for-use python 3.x interpreter. Feel free to use it or modify it in whatever way you want.
+This is an open-source, free-for-use befunge interpreter for Python 3.x. Feel free to use it or modify it in whatever way you want.
 
 # Usage
 UNIX/OSX: "./befunge_interpreter.py path_to_bfg_file"
